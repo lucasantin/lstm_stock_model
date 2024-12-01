@@ -1,15 +1,12 @@
 from application.ports.dtos.stock_price_dto import StockPriceDto
-from application.dtos.predicted_prices_dto import PredictedPricesDto
+from application.dtos.historical_prices_dto import HistoricalPricesDto
 import json
 
 class QueryModelPort:
   def get_predicted_stock_price(self, identifier: str, date_utc: str) -> StockPriceDto:
     pass
 
-  def get_historical_prices(self):
-    pass
-
-  def save_predicted_stock_prices(self, predicted_prices: list[PredictedPricesDto]):
+  def get_historical_prices(self) -> list[HistoricalPricesDto]:
     pass
 
   def to_json(self):

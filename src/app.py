@@ -16,46 +16,22 @@ save_stocks_command = SaveStocksDataCommand(
 )
 predict_price_query = PredictPriceQuery(QueryModelRepository())
 
-
-@app.route(base_route + "/login", methods=["POST"])
-def post_login():
-  print("Request Data:")
-  print(request.json.get('password'))
-  print(request.json.get('username'))
-
-  return { "jwt": "" }
-
-@app.route(base_route + "/stocks/train", methods=["POST"])
-def train_model():
-    try:
-        lstm_loader = LstmModelLoader(QueryModelRepository())
-        lstm_loader.train_and_save_model()
-        return {"success": True, "message": "Modelo LSTM treinado com sucesso!"}, 200
-    except Exception as e:
-        return {"success": False, "error": str(e)}, 400
-
 @app.route(base_route + "/stocks/data", methods=["POST"])
 def post_save_stocks_data():
-    try:
-        save_stocks_command.handle(save_stocks_data_dto.SaveStocksDataDto(
-            request.json.get("identifier"),
-            request.json.get("price"),
-            request.json.get("utc_date_time")
-        ))
-        return {"success": True}, 200
-    except Exception as e:
-        return {"error": str(e)}, 400
+  save_stocks_command.handle(save_stocks_data_dto.SaveStocksDataDto(
+    request.json.get("identifier"),
+    request.json.get("price"),
+    request.json.get("utc_date_time")
+  ))
 
+  return { "success": True }
 
 @app.route(base_route + "/stocks/<identifier>", methods=["GET"])
 def get_predict_stocks_price(identifier: str):
-    try:
-        response_data = predict_price_query.get_stock_price(
-            identifier,
-            request.args.get('date', '')
-        )
-        if response_data is None:
-            return {"data": None}, 404
-        return {"data": response_data.to_json()}, 200
-    except Exception as e:
-        return {"error": str(e)}, 400
+  print("Querying data for {} at {}".format(identifier, request.args.get('date', '')))
+  response_data = predict_price_query.get_stock_price(identifier, request.args.get('date', ''))
+  
+  if response_data == None:
+    return { "data": None }
+  
+  return { "data": response_data.to_json() }

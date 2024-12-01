@@ -1,6 +1,6 @@
 from application.ports.query_model_port import QueryModelPort
 from application.ports.dtos.stock_price_dto import StockPriceDto
-from application.dtos.predicted_prices_dto import PredictedPricesDto
+from application.dtos.historical_prices_dto import HistoricalPricesDto
 import pymongo
 
 class QueryModelRepository(QueryModelPort):
@@ -15,14 +15,11 @@ class QueryModelRepository(QueryModelPort):
     }
 
     cursor = self.db["PredictedPrices"].find_one(query)
-
+    
     if cursor == None:
       return cursor
     else:
       return StockPriceDto(cursor["identifier"], cursor["price"], cursor["date_utc"])
 
-  def get_historical_prices(self):
+  def get_historical_prices(self) -> list[HistoricalPricesDto]:
     return self.db["HistoricalPrices"].find({ })
-  
-  def save_predicted_stock_prices(self, predicted_prices: list[PredictedPricesDto]):
-    self.db["PredictedPrices"].insert_many(predicted_prices)

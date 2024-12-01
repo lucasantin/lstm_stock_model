@@ -1,7 +1,7 @@
 import json
 
-class StockPriceDto:
-  def __init__(self, identifier, price, date_utc):
+class HistoricalPricesDto:
+  def __init__(self, identifier: str, price: float, date_utc: str):
     self.identifier = identifier
     self.price = price
     self.date_utc = date_utc
