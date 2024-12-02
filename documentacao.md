@@ -26,7 +26,7 @@ Este arquivo define a estrutura da API que processa as requisições HTTP e real
 
 ##### Exemplo de Endpoint:
 
-Requisição POST para `http://127.0.0.1:5000/predict`:
+Requisição POST para `http://localhost:5000/predict`:
 
 json
 
