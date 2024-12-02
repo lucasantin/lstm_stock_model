@@ -61,6 +61,9 @@ Retorna os resultados: O arquivo retorna a previsão, as métricas de erro e as 
 #### 3. model.py - Modelo LSTM
 Este arquivo contém a lógica responsável pela construção do modelo de previsão, preparação dos dados e cálculo das métricas de erro. O modelo LSTM (Long Short-Term Memory) é uma rede neural especializada em sequências temporais, como séries de preços de ações.
 
+A arquitetura inclui duas camadas LSTM e uma camada densa para a previsão final.
+O modelo é treinado com 50 épocas e um tamanho de lote de 32.
+
 ##### Funcionalidade:
 Prepara os dados: Utiliza a biblioteca yfinance para baixar os dados históricos do preço das ações, faz a normalização dos dados e os divide em conjuntos de treino e teste.
 Carrega o modelo treinado: Carrega o modelo de previsão que foi treinado previamente e salvo em um arquivo .h5.
