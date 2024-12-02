@@ -8,10 +8,11 @@ WORKDIR /app
 COPY . /app
 
 # Instalar as dependências do projeto
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Expor a porta que a API Flask vai rodar
 EXPOSE 5000
 
 # Definir o comando para iniciar a aplicação
-CMD ["python", "/app/app.py"]
+CMD ["python", "app.py"]

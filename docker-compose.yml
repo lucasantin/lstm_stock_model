@@ -6,7 +6,8 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - .:/app
+      - ./app:/app
     environment:
       - FLASK_ENV=development
+      - PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
     restart: always
