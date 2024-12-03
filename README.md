@@ -33,7 +33,10 @@ json
     "symbol": "AAPL",
     "start_date": "2020-01-01",
     "end_date": "2024-11-20"
-
+	
+	
+##### Exemplo de comando : 
+curl -X POST http://localhost:5000/predict -H "Content-Type: application/json" -d "{\"symbol\": \"AAPL\", \"start_date\": \"2020-01-15\", \"end_date\": \"2024-11-30\"}"
 
 ##### Exemplo de resposta JSON:
 
